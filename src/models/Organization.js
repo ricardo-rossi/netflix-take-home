@@ -13,7 +13,7 @@ export default class Organization extends Model {
      */
     constructor(name) {
         super();
-        this.name = name;
+        this.name = name.toLowerCase();
         this.key = `org-${this.name}`;
         this.repos = `repos-${this.name}`;
         return this;
@@ -25,13 +25,13 @@ export default class Organization extends Model {
      */
     getInfo() {
         return new Promise((resolve, reject) => {
-            const cached = this.get(this.key);
+            const cached = Model._get(this.key);
             if (cached) {
-                return resolve(JSON.parse(cached));
+                return resolve(cached);
             }
             getOrgInfo(this.name)
                 .then((res) => {
-                    this.save(this.key, JSON.stringify(res.data))
+                    Model._save(this.key, res.data)
                     return resolve(res.data);
                 })
                 .catch((err) => {
@@ -47,13 +47,13 @@ export default class Organization extends Model {
      */
     getRepos() {
         return new Promise((resolve, reject) => {
-            const cached = this.get(this.repos);
+            const cached = Model._get(this.repos);
             if (cached) {
-                return resolve(JSON.parse(cached));
+                return resolve(cached);
             }
             getOrgRepos(this.name)
                 .then((res) => {
-                    this.save(this.repos, JSON.stringify(res.data))
+                    Model._save(this.repos, res.data);
                     return resolve(res.data);
                 })
                 .catch((err) => {

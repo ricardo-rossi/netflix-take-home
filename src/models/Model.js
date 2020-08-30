@@ -3,13 +3,12 @@
  */
 export default class Model {
 
-    /**
-     *
-     * @param key
-     * @returns {Model|String}
-     * */
-    get(key) {
-        return localStorage.getItem(key);
+    static _get(key) {
+        const list = localStorage.getItem(key);
+        if (list) {
+            return JSON.parse(list);
+        }
+        return null;
     }
 
     /**
@@ -17,7 +16,11 @@ export default class Model {
      * @param key
      * @param data
      */
-    save(key, data) {
-        localStorage.setItem(key, data);
+    static _save(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    static _remove(key) {
+        localStorage.removeItem(key);
     }
 }

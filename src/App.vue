@@ -1,7 +1,14 @@
 <template>
   <v-app>
     <v-main>
-      <router-view></router-view>
+      <v-container class="pa-10">
+        <v-row
+            align="center"
+            justify="center"
+        >
+          <router-view></router-view>
+        </v-row>
+      </v-container>
       <!--      <HelloWorld/>-->
       <!--      <Test/>-->
     </v-main>

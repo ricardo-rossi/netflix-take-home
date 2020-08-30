@@ -1,10 +1,10 @@
 <template>
-  <div>Welcome</div>
+  <div>404 Not Found</div>
 </template>
 
 <script>
 export default {
-  name: "Welcome"
+  name: 'NotFoundPage'
 }
 </script>
 

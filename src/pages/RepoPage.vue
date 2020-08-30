@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'Repository',
+  name: 'RepoPage',
 
   props: {
     orgId: {
