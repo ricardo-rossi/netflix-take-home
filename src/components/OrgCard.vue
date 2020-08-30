@@ -1,10 +1,10 @@
 <template>
   <v-card
-      class="mx-auto mb-5"
+      class="mx-auto my-4 pa-4"
       max-width="800"
       outlined
       rounded
-      elevation="4"
+      elevation="0"
   >
     <v-list-item three-line>
       <v-list-item-content>
