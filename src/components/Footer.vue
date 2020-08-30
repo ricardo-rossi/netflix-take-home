@@ -1,5 +1,5 @@
 <template>
-  <v-footer dark padless class="indigo lighten-1 white--text text-center">
+  <v-footer dark padless class="footerBg white--text text-center">
     <v-spacer></v-spacer>
     <v-card-text class="white--text">
       &copy; {{ new Date().getFullYear() }} — <strong>Ricardo Rossi</strong>

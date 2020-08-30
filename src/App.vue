@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Header/>
-    <v-main>
+    <v-main class="mainBg">
       <v-container class="px-10 py-8">
         <v-row align="center" justify="center">
           <router-view></router-view>

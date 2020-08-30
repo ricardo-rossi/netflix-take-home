@@ -17,9 +17,9 @@
       </v-btn>
     </v-snackbar>
 
-    <v-row justify="center">
+    <v-row justify="center" class="mb-2">
       <v-card
-          max-width="800"
+          max-width="1000"
           width="100%"
           elevation="0"
           outlined
@@ -53,14 +53,14 @@
       </v-card>
     </v-row>
 
-    <v-row justify="center">
+    <v-row justify="center" class="mx-0 pt-4" v-if="loading">
       <v-skeleton-loader
-          v-if="loading"
-          class="mx-auto mb-5 my-4 pa-4"
-          max-width="800"
+          class="defaultBg"
+          max-width="1000"
           :loading="loading"
           transition="scale-transition"
-          elevation="1"
+          elevation="0"
+          outlined
           height="160"
           width="100%"
           type="article"

@@ -15,8 +15,8 @@ Vue.config.productionTip = false;
 
 const router = new VueRouter({
     routes: [
-        {path: '/org/:orgId', component: OrgPage, props: true},
-        {path: '/org/:orgId/repo/:repoId', component: RepoPage, props: true},
+        {path: '/org/:orgName', component: OrgPage, props: true},
+        {path: '/org/:orgName/repo/:repoName', component: RepoPage, props: true},
         {path: '/', component: OrgListPage},
         {path: '*', component: NotFoundPage},
     ]

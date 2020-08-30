@@ -1,7 +1,7 @@
 <template>
   <v-card
-      class="mx-auto my-4 pa-4"
-      max-width="800"
+      class="mx-auto my-2 pa-4"
+      max-width="1000"
       outlined
       rounded
       elevation="0"
@@ -67,7 +67,7 @@ export default {
 
   computed: {
     orgUrl() {
-      return `/org/${this.data.id}`;
+      return `/org/${this.data.login.toLowerCase()}`;
     }
   },
 
@@ -76,10 +76,5 @@ export default {
       this.onRemove(this.data.login);
     }
   },
-
 }
 </script>
-
-<style scoped>
-
-</style>
