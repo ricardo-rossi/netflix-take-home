@@ -11,7 +11,9 @@
         <v-card-text class="mb-2" style="width: 100%">
           <h1 class="text-h4">
             {{ data.name }}
-            <v-chip color="purple" small class="mr-2" dark>{{ data.public_repos }} public repos</v-chip>
+            <v-chip color="purple" small class="mr-2" dark>
+              {{ data.public_repos }} public repos
+            </v-chip>
           </h1>
           <div class="subtitle-1">
             <a target="_blank" :href="data.html_url">{{ data.html_url }}</a>
@@ -63,12 +65,22 @@ export default {
   },
 
   computed: {
+
+    /**
+     * Helper method for routing
+     *
+     * @return {string}
+     */
     orgUrl() {
       return `/org/${this.data.login.toLowerCase()}`;
     }
   },
 
   methods: {
+
+    /**
+     * Removes the given org by invoking referenced onRemove method
+     */
     remove() {
       this.onRemove(this.data.login);
     }

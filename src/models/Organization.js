@@ -2,11 +2,12 @@ import {getOrgInfo, getOrgRepos} from '@/api/orgs.api';
 import Model from "@/models/Model";
 
 /**
- *
+ * Organization model
  */
 export default class Organization extends Model {
 
     /**
+     * Organization
      *
      * @param name
      * @returns {Organization}
@@ -20,6 +21,7 @@ export default class Organization extends Model {
     }
 
     /**
+     * Gets Organization's metadata
      *
      * @returns {Promise<Organization>}
      */
@@ -35,13 +37,13 @@ export default class Organization extends Model {
                     return resolve(res.data);
                 })
                 .catch((err) => {
-                    console.error(err);
                     return reject(err);
                 });
         });
     }
 
     /**
+     * Get Organization's repositories
      *
      * @returns {Promise<Organization>}
      */
@@ -57,7 +59,6 @@ export default class Organization extends Model {
                     return resolve(res.data);
                 })
                 .catch((err) => {
-                    console.error(err);
                     return reject(err);
                 });
         });

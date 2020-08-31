@@ -2,10 +2,15 @@ import Model from '@/models/Model';
 import Organization from '@/models/Organization';
 
 /**
- *
+ * Represents the Organization List
  */
 class OrgList extends Model {
 
+    /**
+     * Organization List
+     *
+     * @return {OrgList}
+     */
     constructor() {
         super();
         this.key = 'list';
@@ -13,22 +18,30 @@ class OrgList extends Model {
     }
 
     /**
+     * Checks to see if the org is already in the list
      *
      * @param orgName
-     * @return {*}
+     * @return {Boolean}
      */
     has(orgName) {
         const key = orgName.toLowerCase();
         const list = this.getList();
         if (!list) return false;
-        return Array.from(list).find((org) => key === org.login.toLowerCase());
+        return Array.from(list)
+            .find((org) => key === org.login.toLowerCase());
     }
 
+    /**
+     * Returns an array of Organizations
+     *
+     * @return {[]|Organization[]}
+     */
     getList() {
         return Model._get(this.key) || [];
     }
 
     /**
+     * Adds Organization to list
      *
      * @param org {Organization}
      * @return {*[]|Model|String}
@@ -40,6 +53,12 @@ class OrgList extends Model {
         return list;
     }
 
+    /**
+     * Helper to add Organization by name
+     *
+     * @param orgName
+     * @return {Promise<unknown>}
+     */
     async addOrgByName(orgName) {
         return new Promise((resolve, reject) => {
             const org = new Organization(orgName);
@@ -60,6 +79,11 @@ class OrgList extends Model {
         });
     }
 
+    /**
+     * Removes an Organization from the list
+     *
+     * @param orgName
+     */
     remove(orgName) {
         const key = orgName.toLowerCase();
         Model._remove(`org-${key}`);

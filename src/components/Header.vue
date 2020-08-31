@@ -46,11 +46,17 @@ export default {
 
   methods: {
 
+    /**
+     * Provides switching between Dark and Light themes
+     */
     toggleTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       Model._save('dark', this.$vuetify.theme.dark);
     },
 
+    /**
+     * Provides switching between default and RTL modes
+     */
     toggleRTL() {
       this.$vuetify.rtl = !this.$vuetify.rtl;
       Model._save('rtl', this.$vuetify.rtl);

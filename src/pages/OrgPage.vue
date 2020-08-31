@@ -4,14 +4,7 @@
       <v-breadcrumbs :items="navigation" large></v-breadcrumbs>
     </nav>
 
-    <v-card
-        max-width="1000"
-        width="100%"
-        elevation="0"
-        outlined
-        class="px-10"
-    >
-
+    <v-card max-width="1000" width="100%" elevation="0" outlined class="px-10">
       <v-card-text class="mt-4 mb-2">
         <h1 class="text-h4">
           {{ org.name }}
@@ -123,26 +116,60 @@ export default {
   },
 
   methods: {
+
+    /**
+     * Color formatting for popularity field
+     *
+     * @param forks
+     * @return {string}
+     */
     colorPopularity(forks) {
       if (forks > 1000) return 'green'
       else if (forks > 100) return 'orange'
       else return 'red'
     },
+
+    /**
+     * Color formatting for issues field
+     *
+     * @param issues
+     * @return {string}
+     */
     colorIssues(issues) {
       if (issues > 100) return 'red'
       else if (issues > 500) return 'orange'
       else return ''
     },
+
+    /**
+     * Color formatting for watchers field
+     *
+     * @param watchers
+     * @return {string}
+     */
     colorWatchers(watchers) {
       if (watchers > 5000) return 'blue'
       else return ''
     },
+
+    /**
+     * Date formatting (humanized)
+     *
+     * @param dt
+     * @return {string}
+     */
     formatDate(dt) {
       return moment(dt).fromNow()
     },
   },
 
   computed: {
+
+    /**
+     * Returns navigation object for breadcrumbs
+     *
+     * @return {Object}
+     */
     navigation() {
       return [
         {

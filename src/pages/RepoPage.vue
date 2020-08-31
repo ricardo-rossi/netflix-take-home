@@ -165,11 +165,22 @@ export default {
 
   methods: {
 
+    /**
+     * Sets the repo data type
+     *
+     * @param type
+     */
     setType(type) {
       this.type = type;
       this.loadData();
     },
 
+    /**
+     * Formats date (humanized)
+     *
+     * @param item
+     * @return {string}
+     */
     formatDate(item) {
       if (item.commit && item.commit.author && item.commit.author.date) {
         return moment(item.commit.author.date).fromNow();
@@ -177,10 +188,22 @@ export default {
       return '';
     },
 
+    /**
+     * Constructs the commit URL
+     *
+     * @param sha
+     * @return {string}
+     */
     getCommitURL(sha) {
       return `https://github.com/${this.orgName}/${this.repoName}/commit/${sha}`;
     },
 
+    /**
+     * Returns avatar img element
+     *
+     * @param avatar_url
+     * @return {string}
+     */
     showAvatar(avatar_url) {
       if (avatar_url) {
         return `<img alt="Author" width="32" height="32" src=${avatar_url}/>`;
@@ -188,6 +211,9 @@ export default {
       return '';
     },
 
+    /**
+     * Selects the correct table header based on type
+     */
     headers() {
       let _headers;
       switch (this.type) {
@@ -206,6 +232,9 @@ export default {
       return _headers;
     },
 
+    /**
+     * Loads data into instance field
+     */
     async loadData() {
       this.dialog = false;
       const repo = new Repository(this.orgName, this.repoName);
@@ -236,6 +265,11 @@ export default {
 
   computed: {
 
+    /**
+     * Returns navigation object for breadcrumbs
+     *
+     * @return {Object}
+     */
     navigation() {
       return [
         {

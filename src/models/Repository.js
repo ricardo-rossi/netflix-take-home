@@ -1,8 +1,18 @@
 import Model from '@/models/Model';
 import {getRepoBranches, getRepoCommits, getRepoContributors, getRepoInfo} from '@/api/repos.api';
 
+/**
+ * Repository Model
+ */
 export default class Repository extends Model {
 
+    /**
+     * Repository
+     *
+     * @param orgName
+     * @param repoName
+     * @return {Repository}
+     */
     constructor(orgName, repoName) {
         super();
         this.orgName = orgName.trim().toLowerCase();
@@ -14,6 +24,11 @@ export default class Repository extends Model {
         return this;
     }
 
+    /**
+     * Retrieves the Repository metadata
+     *
+     * @return {Promise<unknown>}
+     */
     getInfo() {
         return new Promise((resolve, reject) => {
             const cached = Model._get(this.base);
@@ -26,12 +41,16 @@ export default class Repository extends Model {
                     return resolve(res.data);
                 })
                 .catch((err) => {
-                    console.error(err);
                     return reject(err);
                 });
         });
     }
 
+    /**
+     * Gets a list of recent Repository commits
+     *
+     * @return {Promise<unknown>}
+     */
     getCommits() {
         return new Promise((resolve, reject) => {
             const cached = Model._get(this.commitsKey);
@@ -44,12 +63,16 @@ export default class Repository extends Model {
                     return resolve(res.data);
                 })
                 .catch((err) => {
-                    console.error(err);
                     return reject(err);
                 });
         });
     }
 
+    /**
+     * Fetches the Repository branches
+     *
+     * @return {Promise<unknown>}
+     */
     getBranches() {
         return new Promise((resolve, reject) => {
             const cached = Model._get(this.branchesKey);
@@ -62,12 +85,16 @@ export default class Repository extends Model {
                     return resolve(res.data);
                 })
                 .catch((err) => {
-                    console.error(err);
                     return reject(err);
                 });
         });
     }
 
+    /**
+     * Retrieves a list of Repository contributors
+     *
+     * @return {Promise<unknown>}
+     */
     getContributors() {
         return new Promise((resolve, reject) => {
             const cached = Model._get(this.contribKey);
@@ -80,7 +107,6 @@ export default class Repository extends Model {
                     return resolve(res.data);
                 })
                 .catch((err) => {
-                    console.error(err);
                     return reject(err);
                 });
         });

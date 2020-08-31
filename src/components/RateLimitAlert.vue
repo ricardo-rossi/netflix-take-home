@@ -42,8 +42,13 @@ export default {
   }),
 
   watch: {
+
+    /**
+     * Controls the visibility of the modal window
+     *
+     * @param val
+     */
     show(val) {
-      console.log('val', val);
       this.visible = val;
     }
   }

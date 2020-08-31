@@ -8,22 +8,13 @@
         :top="true"
     >
       {{ alert.text }}
-      <v-btn
-          dark
-          text
-          @click="alert.snackbar = false"
-      >
+      <v-btn dark text @click="alert.snackbar = false">
         Close
       </v-btn>
     </v-snackbar>
 
     <div class="mb-2 mx-1">
-      <v-card
-          max-width="1000"
-          width="100%"
-          elevation="0"
-          outlined
-      >
+      <v-card max-width="1000" width="100%" elevation="0" outlined>
         <v-card-text class="mx-4 mt-2 pa-4">
           <v-list-item three-line>
             <v-list-item-content>
@@ -79,7 +70,7 @@
 <script>
 import OrgList from '@/models/OrgList';
 import OrgCard from '@/components/OrgCard';
-import RateLimitAlert from "@/components/RateLimitAlert";
+import RateLimitAlert from '@/components/RateLimitAlert';
 
 export default {
   name: 'OrgListPage',
@@ -107,24 +98,28 @@ export default {
 
   methods: {
 
+    /**
+     * Loads the org list
+     */
     loadList() {
       this.orgList = OrgList.getList().reverse();
     },
 
+    /**
+     * Handles the org add event
+     */
     async handleAdd() {
       this.loading = true;
       this.dialog = false;
       const orgName = this.newOrgName.trim();
       this.newOrgName = '';
       try {
-        console.log('got here', orgName);
         await OrgList.addOrgByName(orgName);
         this.loadList();
         this.alert.text = `The organization ${orgName} has been added!`;
         this.alert.color = 'success';
         this.alert.snackbar = true;
       } catch (err) {
-        console.log('err', err);
         if (String(err).match(/404/)) {
           this.alert.text = `Couldn't find organization ${orgName}`;
         } else if (String(err).match(/403/)) {
@@ -140,6 +135,7 @@ export default {
     },
 
     /**
+     * Handles the org removal event
      *
      * @param orgName
      */
