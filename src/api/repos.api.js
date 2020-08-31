@@ -8,7 +8,7 @@ import httpClient from './httpClient';
  * @param repoName (the repository's name)
  * @returns {Promise<AxiosResponse<any>>}
  */
-const getRepoInfo = (orgName, repoName) => httpClient.get(`/repos/${repoName}/${repoName}`);
+const getRepoInfo = (orgName, repoName) => httpClient.get(`/repos/${orgName}/${repoName}`);
 
 /**
  * Retrieves the list of commits for a repository
@@ -18,7 +18,7 @@ const getRepoInfo = (orgName, repoName) => httpClient.get(`/repos/${repoName}/${
  * @param repoName (the repository's name)
  * @returns {Promise<AxiosResponse<any>>}
  */
-const getRepoCommits = (orgName, repoName) => httpClient.get(`/repos/${repoName}/${repoName}/commits`);
+const getRepoCommits = (orgName, repoName) => httpClient.get(`/repos/${orgName}/${repoName}/commits`);
 
 /**
  * Retrieves the list of contributors for a repository
@@ -28,7 +28,7 @@ const getRepoCommits = (orgName, repoName) => httpClient.get(`/repos/${repoName}
  * @param repoName (the repository's name)
  * @returns {Promise<AxiosResponse<any>>}
  */
-const getRepoContributors = (orgName, repoName) => httpClient.get(`/repos/${repoName}/${repoName}/contributors`);
+const getRepoContributors = (orgName, repoName) => httpClient.get(`/repos/${orgName}/${repoName}/contributors`);
 
 /**
  * Retrieves the list of branches for a repository
@@ -38,7 +38,7 @@ const getRepoContributors = (orgName, repoName) => httpClient.get(`/repos/${repo
  * @param repoName (the repository's name)
  * @returns {Promise<AxiosResponse<any>>}
  */
-const getRepoBranches = (orgName, repoName) => httpClient.get(`/repos/${repoName}/${repoName}/branches`);
+const getRepoBranches = (orgName, repoName) => httpClient.get(`/repos/${orgName}/${repoName}/branches`);
 
 export {
     getRepoInfo,

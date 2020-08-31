@@ -10,17 +10,24 @@
           width="100%"
           elevation="0"
           outlined
-          class="px-10 pb-10"
+          class="px-6 pb-10"
       >
-        <v-card-text>
-          <v-list-item three-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline mb-1">
-                {{ org.name }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+
+        <v-card-text class="mt-4 mb-4">
+          <h1 class="text-h4">
+            {{ org.name }}
+            <v-chip color="purple" small class="mr-2" dark>{{ org.public_repos }} public repos</v-chip>
+          </h1>
+          <div class="subtitle-1">
+            <a target="_blank" :href="org.html_url">{{ org.html_url }}</a>
+            ({{ org.location }})
+            <div>
+              {{ org.description }}
+            </div>
+          </div>
         </v-card-text>
+
+        <v-divider></v-divider>
 
         <v-data-table
             :must-sort="true"
@@ -30,9 +37,14 @@
             :items="org.repos"
             loading-text="Loading..."
             class="elevation-0"
+            style="width: 100%"
         >
           <template v-slot:item.name="{ item }">
-            <span class="text-uppercase font-weight-medium" v-html="item.name"></span>
+            <span class="text-uppercase font-weight-medium">
+              <router-link :to="`/org/${org.login.toLowerCase()}/repo/${item.name.toLowerCase()}`">
+              {{ item.name }}
+              </router-link>
+            </span>
           </template>
 
           <template v-slot:item.forks="{ item }">
@@ -81,7 +93,7 @@ export default {
       {text: 'Popularity', value: 'forks'},
       {text: 'Open Issues', value: 'open_issues_count'},
       {text: 'Watchers', value: 'watchers_count'},
-      {text: 'Stargazers', value: 'stargazers_count'},
+      {text: 'Stars', value: 'stargazers_count'},
       {text: 'Language', value: 'language'},
       {text: 'License', value: 'license.spdx_id'},
       {text: 'Updated', value: 'updated_at'},
@@ -96,10 +108,9 @@ export default {
     ]).then(([orgInfo, orgRepos]) => {
       this.org = orgInfo;
       this.org.repos = orgRepos;
-      console.log(this.org);
     }).catch((err) => {
       // TODO: handle error
-      console.log(err);
+      console.error(err);
     });
   },
 
