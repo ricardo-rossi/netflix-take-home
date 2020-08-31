@@ -31,7 +31,7 @@
 
 # Live Demo
 
-[https://dnn6yshu89lpe.cloudfront.net/#/](https://dnn6yshu89lpe.cloudfront.net/#/)
+[http://github-popularity.s3-website-us-west-1.amazonaws.com/](http://github-popularity.s3-website-us-west-1.amazonaws.com/)
 
 # Installation and Setup
 
@@ -64,3 +64,38 @@ npm run lint
 npm run test
 ```
 
+### Manual test cases:
+
+Adding an organization
+
+- 1.1 Happy path:
+  - Enter Netflix as the organization name
+  - Hit the Summit button
+  - Verify Netflix shows up in the org list
+- 1.2 Invalid organization name
+  - Enter the SAHSJAHSAHSLKA org name 
+  - Hit the Submit button
+  - Verify the alert message indicates the org was not found
+ 
+Removing an organization
+- Follow 1.1 above to add an org
+- Click the Remove button next to the org
+- Verify the org as removed
+
+Viewing organization repositories
+- Follow 1.1 above to add an org
+- Click the View Repositories button
+- Verify the repository list is shown
+
+View repository details
+- Follow 1.1 above to add an org
+- Click the View Repositories button
+- Select a repository
+- Verify you can see the commits list
+- Click on the Branches tab
+- Verify you can see the branches list
+- Click on the Contributors tab
+- Verify you can see the contributors list
+
+ 
+ 
