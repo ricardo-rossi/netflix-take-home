@@ -33,16 +33,16 @@
               <div class="subtitle-1">
                 Enter a valid organization name below. (i.e: Netflix, Uber, Twitter, Facebook, etc...
               </div>
-              <v-form @submit="handleAdd" class="mt-2">
+              <v-form @submit.prevent="handleAdd" class="mt-2">
                 <v-text-field
-                    label="org name"
-                    name="org-name"
+                    autofocus
+                    label="org-name"
                     v-model="newOrgName"
                     prefix="https://github.com/"
                     prepend-icon="mdi-git"
                     type="text"
                 ></v-text-field>
-                <v-btn class="mr-4 primary" @click="handleAdd">submit</v-btn>
+                <v-btn type="submit" class="mr-4 primary">submit</v-btn>
                 <v-btn @click="newOrgName = ''">clear</v-btn>
               </v-form>
             </v-list-item-content>
@@ -72,17 +72,20 @@
       </div>
     </div>
 
+    <RateLimitAlert :show="dialog"/>
   </div>
 </template>
 
 <script>
 import OrgList from '@/models/OrgList';
 import OrgCard from '@/components/OrgCard';
+import RateLimitAlert from "@/components/RateLimitAlert";
 
 export default {
   name: 'OrgListPage',
 
   components: {
+    RateLimitAlert,
     OrgCard,
   },
 
@@ -94,7 +97,8 @@ export default {
       color: '',
       snackbar: false,
       text: '',
-    }
+    },
+    dialog: false,
   }),
 
   mounted() {
@@ -109,16 +113,26 @@ export default {
 
     async handleAdd() {
       this.loading = true;
+      this.dialog = false;
       const orgName = this.newOrgName.trim();
       this.newOrgName = '';
       try {
+        console.log('got here', orgName);
         await OrgList.addOrgByName(orgName);
         this.loadList();
-        this.alert.text = `${orgName} has been added!`;
+        this.alert.text = `The organization ${orgName} has been added!`;
         this.alert.color = 'success';
         this.alert.snackbar = true;
       } catch (err) {
-        this.alert.text = err;
+        console.log('err', err);
+        if (String(err).match(/404/)) {
+          this.alert.text = `Couldn't find organization ${orgName}`;
+        } else if (String(err).match(/403/)) {
+          this.alert.text = `GitHub API rate limit exceeded. Please try again later.`;
+          this.dialog = true;
+        } else {
+          this.alert.text = err;
+        }
         this.alert.color = 'error';
         this.alert.snackbar = true;
       }
@@ -139,7 +153,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -66,15 +66,20 @@
 
     </v-card>
 
+    <RateLimitAlert :show="dialog"/>
   </div>
 </template>
 
 <script>
 import Organization from '@/models/Organization';
+import RateLimitAlert from '@/components/RateLimitAlert';
 import moment from 'moment';
 
 export default {
   name: 'OrgPage',
+  components: {
+    RateLimitAlert,
+  },
 
   props: {
     orgName: {
@@ -85,6 +90,7 @@ export default {
 
   data: () => ({
     loading: false,
+    dialog: false,
     org: {},
     headers: [
       {text: 'Repository', value: 'name'},
@@ -99,6 +105,7 @@ export default {
   }),
 
   mounted() {
+    this.dialog = false;
     const org = new Organization(this.orgName);
     Promise.all([
       org.getInfo(),
@@ -107,8 +114,11 @@ export default {
       this.org = orgInfo;
       this.org.repos = orgRepos;
     }).catch((err) => {
-      // TODO: handle error
-      console.error(err);
+      if (String(err).match(/403/)) {
+        this.dialog = true;
+      } else {
+        this.$router.replace('/');
+      }
     });
   },
 

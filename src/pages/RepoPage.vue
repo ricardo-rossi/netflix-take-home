@@ -103,16 +103,20 @@
 
       </v-card>
     </div>
+
+    <RateLimitAlert :show="dialog"/>
+
   </div>
 </template>
 
 <script>
 import Repository from '@/models/Repository';
+import RateLimitAlert from '@/components/RateLimitAlert';
 import moment from 'moment';
 
 export default {
   name: 'RepoPage',
-
+  components: {RateLimitAlert},
   props: {
     orgName: {
       type: String,
@@ -151,6 +155,7 @@ export default {
       {text: 'Username', value: 'login'},
       {text: 'Profile', value: 'html_url'},
     ],
+    dialog: false,
   }),
 
   mounted() {
@@ -159,25 +164,30 @@ export default {
   },
 
   methods: {
+
     setType(type) {
       this.type = type;
       this.loadData();
     },
+
     formatDate(item) {
       if (item.commit && item.commit.author && item.commit.author.date) {
         return moment(item.commit.author.date).fromNow();
       }
       return '';
     },
+
     getCommitURL(sha) {
       return `https://github.com/${this.orgName}/${this.repoName}/commit/${sha}`;
     },
+
     showAvatar(avatar_url) {
       if (avatar_url) {
         return `<img alt="Author" width="32" height="32" src=${avatar_url}/>`;
       }
       return '';
     },
+
     headers() {
       let _headers;
       switch (this.type) {
@@ -195,7 +205,9 @@ export default {
       }
       return _headers;
     },
+
     async loadData() {
+      this.dialog = false;
       const repo = new Repository(this.orgName, this.repoName);
       try {
         this.repo = await repo.getInfo();
@@ -213,12 +225,17 @@ export default {
             this.data = await repo.getCommits();
         }
       } catch (err) {
-        console.error(err);
+        if (String(err).match(/403/)) {
+          this.dialog = true;
+        } else {
+          await this.$router.replace('/');
+        }
       }
     },
   },
 
   computed: {
+
     navigation() {
       return [
         {
