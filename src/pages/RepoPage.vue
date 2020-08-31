@@ -3,15 +3,15 @@
     <nav>
       <v-breadcrumbs :items="navigation" large></v-breadcrumbs>
     </nav>
-    <v-row justify="center" class="mb-2">
+    <div class="mb-2">
       <v-card
           max-width="1000"
           width="100%"
           elevation="0"
           outlined
-          class="px-6 pb-10"
+          class="px-10 pb-10"
       >
-        <v-card-text class="mt-4">
+        <v-card-text class="mt-4 mb-2">
           <h1 class="text-h4">
             {{ repo.full_name }}
           </h1>
@@ -102,7 +102,7 @@
         </v-data-table>
 
       </v-card>
-    </v-row>
+    </div>
   </div>
 </template>
 

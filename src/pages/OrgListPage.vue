@@ -17,24 +17,23 @@
       </v-btn>
     </v-snackbar>
 
-    <v-row justify="center" class="mb-2">
+    <div class="mb-2 mx-1">
       <v-card
           max-width="1000"
           width="100%"
           elevation="0"
           outlined
       >
-        <v-card-text>
+        <v-card-text class="mx-4 mt-2 pa-4">
           <v-list-item three-line>
             <v-list-item-content>
-              <v-list-item-title class="headline mb-1">
-                Add a new repository:
+              <v-list-item-title class="text-h5 mb-2">
+                Connect a GitHub repository
               </v-list-item-title>
-              <p>
-                Lorem i[sum Lorem i[sumLorem i[sumLorem i[sumLorem i[sumLorem i[sum
-                Lorem i[sum Lorem i[sumLorem i[sumLorem i[sumLorem i[sumLorem i[sum
-              </p>
-              <v-form @submit="handleAdd">
+              <div class="subtitle-1">
+                Enter a valid organization name below. (i.e: Netflix, Uber, Twitter, Facebook, etc...
+              </div>
+              <v-form @submit="handleAdd" class="mt-2">
                 <v-text-field
                     label="org name"
                     name="org-name"
@@ -49,11 +48,10 @@
             </v-list-item-content>
           </v-list-item>
         </v-card-text>
-
       </v-card>
-    </v-row>
+    </div>
 
-    <v-row justify="center" class="mx-0 pt-4" v-if="loading">
+    <div class="mx-1 pt-2" v-if="loading">
       <v-skeleton-loader
           class="defaultBg"
           max-width="1000"
@@ -66,13 +64,13 @@
           type="article"
       >
       </v-skeleton-loader>
-    </v-row>
+    </div>
 
-    <v-row justify="center">
+    <div class="mb-2 mx-0">
       <div v-for="org in orgList" :key="org.id">
         <OrgCard :data="org" :onRemove="handleRemove"/>
       </div>
-    </v-row>
+    </div>
 
   </div>
 </template>

@@ -4,69 +4,67 @@
       <v-breadcrumbs :items="navigation" large></v-breadcrumbs>
     </nav>
 
-    <v-row justify="center" class="mb-2">
-      <v-card
-          max-width="1000"
-          width="100%"
-          elevation="0"
-          outlined
-          class="px-6 pb-10"
-      >
+    <v-card
+        max-width="1000"
+        width="100%"
+        elevation="0"
+        outlined
+        class="px-10"
+    >
 
-        <v-card-text class="mt-4 mb-4">
-          <h1 class="text-h4">
-            {{ org.name }}
-            <v-chip color="purple" small class="mr-2" dark>{{ org.public_repos }} public repos</v-chip>
-          </h1>
-          <div class="subtitle-1">
-            <a target="_blank" :href="org.html_url">{{ org.html_url }}</a>
-            ({{ org.location }})
-            <div>
-              {{ org.description }}
-            </div>
+      <v-card-text class="mt-4 mb-2">
+        <h1 class="text-h4">
+          {{ org.name }}
+          <v-chip color="purple" small class="mr-2" dark>{{ org.public_repos }} public repos</v-chip>
+        </h1>
+        <div class="subtitle-1">
+          <a target="_blank" :href="org.html_url">{{ org.html_url }}</a>
+          ({{ org.location }})
+          <div>
+            {{ org.description }}
           </div>
-        </v-card-text>
+        </div>
+      </v-card-text>
 
-        <v-divider></v-divider>
+      <v-divider></v-divider>
 
-        <v-data-table
-            :must-sort="true"
-            sort-by="forks"
-            :sort-desc="true"
-            :headers="headers"
-            :items="org.repos"
-            loading-text="Loading..."
-            class="elevation-0"
-            style="width: 100%"
-        >
-          <template v-slot:item.name="{ item }">
+      <v-data-table
+          :must-sort="true"
+          sort-by="forks"
+          :sort-desc="true"
+          :headers="headers"
+          :items="org.repos"
+          loading-text="Loading..."
+          class="elevation-0 mt-1"
+          style="width: 100%"
+      >
+        <template v-slot:item.name="{ item }">
             <span class="text-uppercase font-weight-medium">
               <router-link :to="`/org/${org.login.toLowerCase()}/repo/${item.name.toLowerCase()}`">
               {{ item.name }}
               </router-link>
             </span>
-          </template>
+        </template>
 
-          <template v-slot:item.forks="{ item }">
-            <v-chip :color="colorPopularity(item.forks)" dark>{{ item.forks }}</v-chip>
-          </template>
+        <template v-slot:item.forks="{ item }">
+          <v-chip :color="colorPopularity(item.forks)" dark>{{ item.forks }}</v-chip>
+        </template>
 
-          <template v-slot:item.open_issues_count="{ item }">
-            <v-chip :color="colorIssues(item.open_issues_count)" dark>{{ item.open_issues_count }}</v-chip>
-          </template>
+        <template v-slot:item.open_issues_count="{ item }">
+          <v-chip :color="colorIssues(item.open_issues_count)" dark>{{ item.open_issues_count }}</v-chip>
+        </template>
 
-          <template v-slot:item.watchers_count="{ item }">
-            <v-chip :color="colorWatchers(item.watchers_count)" dark>{{ item.watchers_count }}</v-chip>
-          </template>
+        <template v-slot:item.watchers_count="{ item }">
+          <v-chip :color="colorWatchers(item.watchers_count)" dark>{{ item.watchers_count }}</v-chip>
+        </template>
 
-          <template v-slot:item.updated_at="{ item }">
-            {{ formatDate(item.updated_at) }}
-          </template>
+        <template v-slot:item.updated_at="{ item }">
+          {{ formatDate(item.updated_at) }}
+        </template>
 
-        </v-data-table>
+      </v-data-table>
 
-      </v-card>
-    </v-row>
+    </v-card>
 
   </div>
 </template>

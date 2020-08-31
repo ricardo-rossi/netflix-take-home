@@ -1,29 +1,26 @@
 <template>
   <v-card
-      class="mx-auto my-2 pa-4"
+      class="mx-1 mb-2 pa-4"
       max-width="1000"
-      outlined
+      outline
       rounded
       elevation="0"
   >
     <v-list-item three-line>
       <v-list-item-content>
-        <div class="overline mb-4">
-          Open on GitHub
-        </div>
-        <v-list-item-title class="headline mb-1">
-          {{ data.name }}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          {{ data.description }}
-        </v-list-item-subtitle>
-        <v-list-item-subtitle>
-          {{ data.location }}
-        </v-list-item-subtitle>
-        <v-list-item-subtitle>
-          {{ data.public_repos }} public repos
-          {{ data.url }}
-        </v-list-item-subtitle>
+        <v-card-text class="mb-2" style="width: 100%">
+          <h1 class="text-h4">
+            {{ data.name }}
+            <v-chip color="purple" small class="mr-2" dark>{{ data.public_repos }} public repos</v-chip>
+          </h1>
+          <div class="subtitle-1">
+            <a target="_blank" :href="data.html_url">{{ data.html_url }}</a>
+            ({{ data.location }})
+            <div>
+              {{ data.description }}
+            </div>
+          </div>
+        </v-card-text>
       </v-list-item-content>
 
       <v-list-item-avatar

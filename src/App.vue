@@ -2,7 +2,7 @@
   <v-app>
     <Header/>
     <v-main class="mainBg">
-      <v-container class="px-10 py-8">
+      <v-container class="pt-6">
         <v-row align="center" justify="center">
           <router-view></router-view>
         </v-row>
